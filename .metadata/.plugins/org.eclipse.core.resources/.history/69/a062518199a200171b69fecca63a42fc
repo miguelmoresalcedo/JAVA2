@@ -1,0 +1,146 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.Checkbox;
+import javax.swing.JCheckBox;
+import javax.swing.JTextField;
+
+public class Ejercicio extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField txtHola;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Ejercicio frame = new Ejercicio();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Ejercicio() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 414);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnEdicion = new JMenu("EDICION");
+		menuBar.add(mnEdicion);
+		
+		JMenuItem mntmAnular = new JMenuItem("ANULAR");
+		mnEdicion.add(mntmAnular);
+		
+		JMenuItem mntmReservar = new JMenuItem("RESERVAR");
+		mnEdicion.add(mntmReservar);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblVentaDeCoches = new JLabel("VENTA DE COCHES POR INTERNET");
+		lblVentaDeCoches.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+		lblVentaDeCoches.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVentaDeCoches.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblVentaDeCoches.setBounds(17, 6, 311, 16);
+		contentPane.add(lblVentaDeCoches);
+		
+		JLabel lblNewLabel = new JLabel("Elija el vehiculo que quiere comprar");
+		lblNewLabel.setBounds(17, 34, 239, 16);
+		contentPane.add(lblNewLabel);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ferrari", "Audi", "BMW", "Mercedes", "Porsche", "Aston Marin", "Alfa Romeo"}));
+		comboBox.setBounds(17, 53, 165, 27);
+		contentPane.add(comboBox);
+		
+		JLabel lblNewLabel_1 = new JLabel("Elija el metodo de pago");
+		lblNewLabel_1.setBounds(17, 82, 222, 16);
+		contentPane.add(lblNewLabel_1);
+		
+		JCheckBox chckbxPagoPorPlazos = new JCheckBox("Pago por plazos");
+		chckbxPagoPorPlazos.setBounds(27, 110, 132, 23);
+		contentPane.add(chckbxPagoPorPlazos);
+		
+		JCheckBox chckbxPagoUnico = new JCheckBox("Pago unico");
+		chckbxPagoUnico.setBounds(180, 110, 111, 23);
+		contentPane.add(chckbxPagoUnico);
+		
+		txtHola = new JTextField();
+		txtHola.setEnabled(false);
+		txtHola.setText("Introduzca los datos");
+		txtHola.setBounds(94, 162, 162, 26);
+		contentPane.add(txtHola);
+		txtHola.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Nombre:");
+		lblNewLabel_2.setBounds(27, 167, 61, 16);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblRelleneLosSiguientes = new JLabel("Rellene los siguientes datos para finalizar la compra");
+		lblRelleneLosSiguientes.setBounds(17, 139, 329, 16);
+		contentPane.add(lblRelleneLosSiguientes);
+		
+		JLabel lblNewLabel_3 = new JLabel("Apellidos");
+		lblNewLabel_3.setBounds(27, 195, 61, 16);
+		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("DNI");
+		lblNewLabel_4.setBounds(27, 223, 61, 16);
+		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("Direccion");
+		lblNewLabel_5.setBounds(27, 251, 61, 16);
+		contentPane.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("Numero");
+		lblNewLabel_6.setBounds(27, 276, 61, 16);
+		contentPane.add(lblNewLabel_6);
+		
+		textField = new JTextField();
+		textField.setBounds(94, 190, 130, 26);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(94, 218, 130, 26);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(94, 246, 130, 26);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(94, 271, 130, 26);
+		contentPane.add(textField_3);
+		textField_3.setColumns(10);
+	}
+}
