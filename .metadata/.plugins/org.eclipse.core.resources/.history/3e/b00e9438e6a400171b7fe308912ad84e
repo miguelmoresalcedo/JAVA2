@@ -1,0 +1,55 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class ListaCompra extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField txtMiguelMore;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ListaCompra frame = new ListaCompra();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ListaCompra() {
+		setTitle("Lista de la compra");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblIdentificadorDelUsuario = new JLabel("Identificador del usuario");
+		lblIdentificadorDelUsuario.setBounds(21, 23, 154, 16);
+		contentPane.add(lblIdentificadorDelUsuario);
+		
+		txtMiguelMore = new JTextField();
+		txtMiguelMore.setEnabled(false);
+		txtMiguelMore.setEditable(false);
+		txtMiguelMore.setText("Miguel More");
+		txtMiguelMore.setBounds(185, 18, 130, 26);
+		contentPane.add(txtMiguelMore);
+		txtMiguelMore.setColumns(10);
+	}
+}

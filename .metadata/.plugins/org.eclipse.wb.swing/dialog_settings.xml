@@ -12,6 +12,12 @@
 		<item value="316" key="y"/>
 		<item value="267" key="height"/>
 	</section>
+	<section name="org.eclipse.wb.internal.swing.model.property.editor.border.BorderDialog">
+		<item value="487" key="x"/>
+		<item value="466" key="width"/>
+		<item value="263" key="y"/>
+		<item value="373" key="height"/>
+	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.models.combo.ComboBoxModelDialog">
 		<item value="480" key="x"/>
 		<item value="479" key="width"/>
