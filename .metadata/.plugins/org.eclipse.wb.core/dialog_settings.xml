@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="org.eclipse.wb.internal.core.model.property.order.ReorderDialog">
+		<item value="470" key="x"/>
+		<item value="500" key="width"/>
+		<item value="272" key="y"/>
+		<item value="313" key="height"/>
+	</section>
 	<section name="org.eclipse.wb.internal.core.editor.palette.dialogs.ImportArchiveDialog">
 		<item value="457" key="x"/>
-		<item value="525" key="width"/>
+		<item value="716" key="width"/>
 		<item value="220" key="y"/>
 		<item value="418" key="height"/>
 		<list key="HISTORY_JAR_LIST">
+			<item value="/Users/miguelmoresalcedo/Desktop/DAM/2_DAM/GitHub/java2/Jcalendar/jcalendar-1.4.jar"/>
 			<item value="/Users/miguelmoresalcedo/Desktop/DAM/2 DAM/2. Desarrollo de interface/jcalendar/jcalendar-1.4.jar"/>
 		</list>
 	</section>
