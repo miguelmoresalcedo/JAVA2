@@ -2,6 +2,8 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,8 +15,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class Sudoku {
+public class Sudoku extends Principal {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -38,6 +42,143 @@ public class Sudoku {
 	private JButton btnReset;
 	private JPanel panel_3;
 	private JPanel panel_4;
+	static int N = 4;
+
+	public static int getN() {
+		return N;
+	}
+
+	public static void setN(int n) {
+		N = n;
+	}
+
+	// sample input
+	public static int grid[][] = {  { 2, 0, 0, 0}, //
+									{ 0, 3, 0, 4}, //
+									{ 3, 0, 0, 1}, //
+									{ 4, 0, 3, 0} };
+	
+	public static int grid_solve[][] = {  { 2, 4, 1, 3}, //
+										  { 1, 3, 2, 4}, //
+			                              { 3, 2, 4, 1}, //
+			                              { 4, 1, 3, 2} };
+
+
+	public static int[][] getGrid() {
+		return grid;
+	}
+
+	public static void setGrid(int[][] grid) {
+		Sudoku.grid = grid;
+	}
+	static boolean isValid(Cell cell, int value) {
+
+		if (grid[cell.row][cell.col] != 0) {
+			throw new RuntimeException("Cannot call for cell which already has a value");
+		}
+
+		// if v present row, return false
+		for (int c = 0; c < 4; c++) {
+			if (grid[cell.row][c] == value)
+				return false;
+		}
+
+		// if v present in col, return false
+		for (int r = 0; r < 4; r++) {
+			if (grid[r][cell.col] == value)
+				return false;
+		}
+
+		// if v present in grid, return false
+
+		// to get the grid we should calculate (x1,y1) (x2,y2)
+		int x1 = 2 * (cell.row / 2);
+		int y1 = 2 * (cell.col / 2);
+		int x2 = x1 + 1;
+		int y2 = y1 + 1;
+
+		for (int x = x1; x <= x2; x++)
+			for (int y = y1; y <= y2; y++)
+				if (grid[x][y] == value)
+					return false;
+
+		// if value not present in row, col and bounding box, return true
+		return true;
+	}
+
+	// simple function to get the next cell
+	// read for yourself, very simple and straight forward
+	static Cell getNextCell(Cell cur) {
+
+		int row = cur.row;
+		int col = cur.col;
+
+		// next cell => col++
+		col++;
+
+		// if col > 8, then col = 0, row++
+		// reached end of row, got to next row
+		if (col > 3) {
+			// goto next line
+			col = 0;
+			row++;
+		}
+
+		// reached end of matrix, return null
+		if (row > 3)
+			return null; // reached end
+
+		Cell next = new Cell(row, col);
+		return next;
+	}
+
+	// everything is put together here
+	// very simple solution
+	// must return true, if the soduku is solved, return false otherwise
+	public boolean solve(Cell cur) {
+
+		// if the cell is null, we have reached the end
+		if (cur == null)
+			return true;
+
+		// if grid[cur] already has a value, there is nothing to solve here,
+		// continue on to next cell
+		if (grid[cur.row][cur.col] != 0) {
+			// return whatever is being returned by solve(next)
+			// i.e the state of soduku's solution is not being determined by
+			// this cell, but by other cells
+			return solve(getNextCell(cur));
+		}
+
+		// this is where each possible value is being assigned to the cell, and
+		// checked if a solutions could be arrived at.
+
+		// if grid[cur] doesn't have a value
+		// try each possible value
+		for (int i = 1; i <= 4; i++) {
+			// check if valid, if valid, then update
+			boolean valid = isValid(cur, i);
+
+			if (!valid) // i not valid for this cell, try other values
+				continue;
+
+			// assign here
+			grid[cur.row][cur.col] = i;
+
+			// continue with next cell
+			boolean solved = solve(getNextCell(cur));
+			// if solved, return, else try other values
+			if (solved)
+				return true;
+			else
+				grid[cur.row][cur.col] = 0; // reset
+			// continue with other possible values
+		}
+
+		// if you reach here, then no value from 1 - 9 for this cell can solve
+		// return false
+		return false;
+	}
 
 	/**
 	 * Launch the application.
@@ -54,6 +195,8 @@ public class Sudoku {
 			}
 		});
 	}
+	
+	
 
 	/**
 	 * Create the application.
@@ -231,15 +374,9 @@ public class Sudoku {
 		
 		//EVENTOS
 		
-		/*btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textField_1.setText("5");
-				textField_1.setEditable(false);
-				textField_1.setEnabled(false);	
-			}
-		});*/
+	
 		
-		//REDIMENSIION
+		//REDIMENSION
 		
 		rdbtnNewRadioButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -265,11 +402,31 @@ public class Sudoku {
 		
 		// SOMBREADO
 		
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textField_2.setBackground(SystemColor.windowBorder);
-			}
+		chckbxNewCheckBox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(chckbxNewCheckBox.isSelected()){
+				textField.setBackground(SystemColor.windowBorder);
+				textField_5.setBackground(SystemColor.windowBorder);
+				textField_7.setBackground(SystemColor.windowBorder);
+				textField_9.setBackground(SystemColor.windowBorder);
+				textField_12.setBackground(SystemColor.windowBorder);
+				textField_13.setBackground(SystemColor.windowBorder);
+				textField_15.setBackground(SystemColor.windowBorder);
+				
+				}
+				else{
+					textField.setBackground(SystemColor.WHITE);
+					textField_5.setBackground(SystemColor.WHITE);
+					textField_7.setBackground(SystemColor.WHITE);
+					textField_9.setBackground(SystemColor.WHITE);
+					textField_12.setBackground(SystemColor.WHITE);
+					textField_13.setBackground(SystemColor.WHITE);
+					textField_15.setBackground(SystemColor.WHITE);
+				}
+				}
 		});
+		
 		
 		//RESET
 		
@@ -292,9 +449,71 @@ public class Sudoku {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//dentro de la matriz recorra los elementos y lo resuelva automaticamente con el algoritmo
+				Sudoku prueba = new Sudoku();
 				
+				boolean solved = prueba.solve(new Cell(0, 0));
+				if (!solved) {
+					System.out.println("SUDOKU cannot be solved.");
+					return;
+				}
+				
+				
+				
+				printGrid(prueba.getGrid());
+				 int text1 = grid[0][1] ;
+				 int text2 = grid[0][2] ;
+				 int text3 = grid[0][3] ;
+				 int text4 = grid[1][0] ;
+				 int text5 = grid[1][2] ;
+				 int text6 = grid[2][1] ;
+				 int text7 = grid[2][2] ;
+				 int text8 = grid[3][1] ;
+				 int text9 = grid[3][3] ;
+				textField_1.setText(String.valueOf(text1));
+				textField_2.setText(String.valueOf(text2));
+				textField_3.setText(String.valueOf(text3));
+				textField_4.setText(String.valueOf(text4));
+				textField_6.setText(String.valueOf(text5));
+				textField_10.setText(String.valueOf(text6));
+				textField_11.setText(String.valueOf(text7));
+				textField_14.setText(String.valueOf(text8));
+				textField_16.setText(String.valueOf(text9));
 			}
+				
 			
+		});
+		
+		//manual
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 int text1 = grid_solve[0][1] ;
+				 int text2 = grid_solve[0][2] ;
+				 int text3 = grid_solve[0][3] ;
+				 int text4 = grid_solve[1][0] ;
+				 int text5 = grid_solve[1][2] ;
+				 int text6 = grid_solve[2][1] ;
+				 int text7 = grid_solve[2][2] ;
+				 int text8 = grid_solve[3][1] ;
+				 int text9 = grid_solve[3][3] ;
+				if(textField_1.getText().equals(String.valueOf(text1)) &&
+						textField_2.getText().equals(String.valueOf(text2))&&
+								textField_3.getText().equals(String.valueOf(text3))&&
+										textField_4.getText().equals(String.valueOf(text4))&&
+												textField_6.getText().equals(String.valueOf(text5))&&
+														textField_10.getText().equals(String.valueOf(text6))&&
+																textField_11.getText().equals(String.valueOf(text7))&&
+																		textField_14.getText().equals(String.valueOf(text8))&&
+																				textField_16.getText().equals(String.valueOf(text9))){
+					JOptionPane.showMessageDialog(null, "CORRECTO","Nice", JOptionPane.PLAIN_MESSAGE);
+				}
+						
+				else{
+					
+					JOptionPane.showMessageDialog(null, "Nº incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+			}
 		});
 	}
 }

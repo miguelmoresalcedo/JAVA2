@@ -122,9 +122,10 @@ public class Login extends Registro{
 				//nombre = contraseña, y entra como valido
 				
 				//esto sería otra forma de meter el usuario en la que tanto user como password tiene que ser lo mismo, sino da error
-				//if(textFieldUser.getText().equals(contraseñaFinal.toString())){
-		
-				if(textFieldUser.getText().equals("miguel") && contraseñaFinal.equals("more")){
+				
+				
+				if(!textFieldUser.getText().isEmpty() && !passwordField.getText().isEmpty() && textFieldUser.getText().equals(passwordField.getText())){
+				//if(textFieldUser.getText().equals("miguel") && contraseñaFinal.equals("more")){
 					
 					JOptionPane.showMessageDialog(null, "Usted se ha logueado", "Ingresaste", JOptionPane.INFORMATION_MESSAGE);
 					
