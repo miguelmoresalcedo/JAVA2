@@ -11428,3 +11428,6 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 
 !ENTRY org.eclipse.core.net 1 0 2017-10-06 12:23:54.254
 !MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2017-10-06 12:50:01.933
+!MESSAGE No repository found at jar:file:/Users/miguelmoresalcedo/Desktop/DAM/2%20DAM/2.%20Desarrollo%20de%20interface/jcalendar/jcalendar-1.4.jar!/.

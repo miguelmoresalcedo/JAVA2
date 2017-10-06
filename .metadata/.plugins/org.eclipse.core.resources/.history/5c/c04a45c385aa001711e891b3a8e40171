@@ -374,7 +374,8 @@ public class Sudoku extends Principal {
 		panel_4.add(btnNewButton_2);
 		
 		//EVENTOS
-
+		
+	
 		
 		//REDIMENSION
 		
